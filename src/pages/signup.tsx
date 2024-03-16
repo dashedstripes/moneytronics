@@ -1,34 +1,27 @@
 import Nav from "@/components/Nav";
-import GoTrue from "gotrue-js";
+import { useAuth } from "@/utils/AuthContext";
 import Link from "next/link";
 import { useState } from "react";
 
 
 export default function Signup() {
+  const { signup } = useAuth();
   const [error, setError] = useState<string | null>(null);
   const [confirmationSent, setConfirmationSent] = useState<boolean>(false);
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setError(null);
 
-    setError(null);;
+    const { email, password } = (event.target as HTMLFormElement);
 
-    const email = (event.target as HTMLFormElement).email.value;
-    const password = (event.target as HTMLFormElement).password.value;
-
-    const auth = new GoTrue({
-      APIUrl: process.env.NEXT_PUBLIC_NETLIFY_IDENTITY_URL,
-      audience: '',
-      setCookie: false,
-    });
-
-    auth
-    .signup(email, password)
-    .then(() => {
+    try {
+      await signup(email.value, password.value);
       setConfirmationSent(true);
       (event.target as HTMLFormElement).reset();
-    })
-    .catch(() => setError("Unable to sign up, please try again later."));
+    } catch (error) {
+      setError("Unable to sign up, please try again later.");
+    }
   }
   
   return (

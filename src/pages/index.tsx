@@ -1,38 +1,35 @@
 
 import Nav from "@/components/Nav";
-import GoTrue from "gotrue-js";
+import { useAuth } from "@/utils/AuthContext";
 import { useEffect, useState } from "react";
 
 export default function Home() {
+  const { confirm } = useAuth();
   const [loginConfirmation, setLoginConfirmation] = useState<boolean>(false);
+  const [confirmationPending, setConfirmationPending] = useState<boolean>(false);
 
   useEffect(() => {
     if (window.location.hash.includes("#confirmation_token")) {
+      setConfirmationPending(true);
       const token = window.location.hash.split("=")[1];
       validateConfirmationToken(token);
     }
   }, []);
 
-  const validateConfirmationToken = (token: string) => {
-    const auth = new GoTrue({
-      APIUrl: process.env.NEXT_PUBLIC_NETLIFY_IDENTITY_URL,
-      audience: '',
-      setCookie: false,
-    });
-
-    auth
-      .confirm(token, true)
-      .then((response) => {
-        console.log('Confirmation email sent', JSON.stringify({ response }));
-        setLoginConfirmation(true);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  const validateConfirmationToken = async (token: string) => {
+    try {
+      await confirm(token);
+      setLoginConfirmation(true);
+      setConfirmationPending(false);
+    } catch (error) {
+      console.log(error);
+      setConfirmationPending(false);
+    }
   };
 
   return (
     <main className="container mx-auto px-8">
+      {confirmationPending && <p className="text-blue-500 mt-4">Validating sign up...</p>}
       {loginConfirmation && <p className="text-green-500 mt-4">You have successfully logged in!</p>}
       <Nav />
       <h1>Home</h1>
