@@ -38,7 +38,7 @@ export default function Login() {
         </div>
         <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">{authLoading ? "Logging in..." : "Login"}</button>
         <p className="mt-4">
-          Don't have an account? <Link href="/signup" className="text-blue-500 hover:underline">Sign up</Link>
+          Don&apos;t have an account? <Link href="/signup" className="text-blue-500 hover:underline">Sign up</Link>
         </p>
 
         {error && <p className="text-red-500 mt-4">{error}</p>}

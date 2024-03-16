@@ -9,23 +9,25 @@ export default function Home() {
   const [confirmationPending, setConfirmationPending] = useState<boolean>(false);
 
   useEffect(() => {
+    const validateConfirmationToken = async (token: string) => {
+      try {
+        await confirm(token);
+        setLoginConfirmation(true);
+        setConfirmationPending(false);
+      } catch (error) {
+        console.log(error);
+        setConfirmationPending(false);
+      }
+    };
+
     if (window.location.hash.includes("#confirmation_token")) {
       setConfirmationPending(true);
       const token = window.location.hash.split("=")[1];
       validateConfirmationToken(token);
     }
-  }, []);
+  }, [confirm]);
 
-  const validateConfirmationToken = async (token: string) => {
-    try {
-      await confirm(token);
-      setLoginConfirmation(true);
-      setConfirmationPending(false);
-    } catch (error) {
-      console.log(error);
-      setConfirmationPending(false);
-    }
-  };
+  
 
   return (
     <main className="container mx-auto px-8">
