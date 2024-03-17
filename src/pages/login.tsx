@@ -1,14 +1,22 @@
 import Nav from "@/components/Nav";
 import { useAuth } from "@/utils/AuthContext";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { useState } from "react";
 
 
 export default function Login() {
-  const { login, authLoading } = useAuth();
-
+  const { login, authLoading, user } = useAuth();
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<boolean>(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user) {
+      router.push("/");
+    }
+  }, [user]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
