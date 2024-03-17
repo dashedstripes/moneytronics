@@ -6,8 +6,9 @@ export default function LanguageSelector(){
 
   const getFlagEmoji = (language: string) => {
     const flagEmojis: {[key: string]: string} = {
-      en: '🇺🇸',
-      es: '🇪🇸',
+      "en-us": "🇺🇸",
+      "en-gb": "🇬🇧",
+      "es-es": "🇪🇸",
     };
 
     return flagEmojis[language] || '';

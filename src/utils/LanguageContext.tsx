@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 
-const languages = ['en', 'es'];
+const languages = ['en-us', 'en-gb', 'es-es'];
 
 type LanguageContextType = {
   language: string;
@@ -22,11 +22,26 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [language, setLanguage] = useState('en');
 
   useEffect(() => {
+    async function getGeo() {
+      const response = await fetch('/get-geo');
+      const languageCode = await response.text();
+      return languageCode;
+    }
+
     // TODO: store this in a blob
     const storedLanguage = localStorage.getItem('language');
-    // TODO: get users location using an edge function and set default based on that
-    setLanguage(storedLanguage || 'en');
+
+    if(storedLanguage) {
+      setLanguage(storedLanguage);
+    } else {
+      getGeo()
+      .then((languageCode) => {
+        updateLanguage(languageCode);
+      });
+    }
   }, []);
+
+
 
   const updateLanguage = (newLanguage: string) => {
     // TODO: store this in a blob
