@@ -55,6 +55,8 @@ export async function getServerSideProps(context: any) {
     locale: context.locale,
   });
 
+  context.res.setHeader("Cache-Control", "public, max-age=0, stale-while-revalidate=604800");
+
   return {
     props: {
       products: products || [],
