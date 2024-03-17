@@ -1,12 +1,12 @@
-import { useLanguage } from "@/utils/LanguageContext";
+import { useRouter } from "next/router";
 
 const currencySymbols: { [key: string]: string } = {
-  "en-us": "$",
-  "en-gb": "£",
-  "es-es": "€",
+  "en-US": "$",
+  "en-GB": "£",
+  "es-ES": "€",
 };
 
 export default function Currency() {
-  const { language } = useLanguage();
-  return <span>{currencySymbols[language]}</span>;
+  const router = useRouter();
+  return <span>{currencySymbols[router.locale || "en-US"]}</span>;
 }

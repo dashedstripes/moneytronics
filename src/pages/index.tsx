@@ -49,8 +49,11 @@ export default function Home({ products }: { products: any[] }) {
   );
 }
 
-export async function getStaticProps() {
-  const products = await getProducts({ source: "test" });
+export async function getServerSideProps(context: any) {
+  const products = await getProducts({ 
+    source: "test",
+    locale: context.locale,
+  });
 
   return {
     props: {

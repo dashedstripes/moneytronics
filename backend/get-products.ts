@@ -32,7 +32,11 @@ async function getProductsFromBlob(): Promise<Product[]> {
   return products.blobs as unknown as Product[] || [];
 }
 
-export async function getProducts(params: { source: string }): Promise<Product[]> {
+export async function getProducts(
+  params: { 
+    source: string,
+    locale: string,
+  }): Promise<Product[]> {
   switch(params.source) {
     case "test":
       return getTestProducts();
