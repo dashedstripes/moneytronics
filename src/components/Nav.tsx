@@ -1,5 +1,6 @@
 import { useAuth } from "@/utils/AuthContext";
 import Link from "next/link";
+import LanguageSelector from "./LanguageSelector";
 
 export default function Nav() {
   const { user, logout } = useAuth();
@@ -8,14 +9,20 @@ export default function Nav() {
     <nav className="flex justify-between py-8">
       <Link href="/">moneytronics</Link>
 
-      {user ? (
-        <div className="flex gap-4">
-          <Link href="/profile">profile</Link>
-          <button onClick={() => logout()}>logout</button>
+      <div className="flex gap-4">
+        {user ? (
+          <>
+            <Link href="/profile">profile</Link>
+            <button onClick={() => logout()}>logout</button>
+          </>
+        ) : (
+          <Link href="/login">login</Link>
+        )}
+
+        <div className="ml-4">
+          <LanguageSelector/>
         </div>
-      ) : (
-        <Link href="/login">login</Link>
-      )}
+      </div>
     </nav>
   );
 }
