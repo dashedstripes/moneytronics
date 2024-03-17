@@ -35,7 +35,7 @@ export default function Home({ products }: { products: any[] }) {
       
       <Nav />
 
-      <div className="grid grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-3 gap-8">
         {products?.map((product) => (
           <div key={product.id} className="border p-8">
             <h2 className="font-bold text-xl">{product.name}</h2>
@@ -55,7 +55,7 @@ export async function getServerSideProps(context: any) {
     locale: context.locale,
   });
 
-  context.res.setHeader("Cache-Control", "public, max-age=0, stale-while-revalidate=604800");
+  context.res.setHeader("Cache-Control", "public, max-age=604800, stale-while-revalidate=604800");
 
   return {
     props: {
