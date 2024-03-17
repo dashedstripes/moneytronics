@@ -1,9 +1,10 @@
-
 import Nav from "@/components/Nav";
 import { useAuth } from "@/utils/AuthContext";
 import { useEffect, useState } from "react";
+import { getProducts } from "../../backend/get-products";
+import Currency from "@/components/Currency";
 
-export default function Home() {
+export default function Home({ products }: { products: any[] }) {
   const { confirm } = useAuth();
   const [loginConfirmation, setLoginConfirmation] = useState<boolean>(false);
   const [confirmationPending, setConfirmationPending] = useState<boolean>(false);
@@ -27,14 +28,33 @@ export default function Home() {
     }
   }, [confirm]);
 
-  
-
   return (
     <main className="container mx-auto px-8">
       {confirmationPending && <p className="text-blue-500 mt-4">Validating sign up...</p>}
       {loginConfirmation && <p className="text-green-500 mt-4">You have successfully logged in!</p>}
+      
       <Nav />
-      <h1>Home</h1>
+
+      <div className="grid grid-cols-3 gap-8">
+        {products?.map((product) => (
+          <div key={product.id} className="border p-8">
+            <h2 className="font-bold text-xl">{product.name}</h2>
+            <div className="flex justify-end">
+              <p><Currency/>{product.price}</p>
+            </div>
+          </div>
+        ))}
+      </div>
     </main>
   );
+}
+
+export async function getStaticProps() {
+  const products = await getProducts({ source: "test" });
+
+  return {
+    props: {
+      products: products || [],
+    },
+  };
 }
