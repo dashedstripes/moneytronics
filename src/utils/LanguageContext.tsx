@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
+import { useAuth } from './AuthContext';
 
 const languages = ['en-us', 'en-gb', 'es-es'];
 
@@ -19,7 +20,8 @@ export const useLanguage = (): LanguageContextType => {
 };
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState('en');
+  const { user, getJWT } = useAuth();
+  const [language, setLanguage] = useState('en-us');
 
   useEffect(() => {
     async function getGeo() {
@@ -28,23 +30,57 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       return languageCode;
     }
 
-    // TODO: store this in a blob
-    const storedLanguage = localStorage.getItem('language');
-
-    if(storedLanguage) {
-      setLanguage(storedLanguage);
+    if(user) {
+      (async () => {
+        try {
+          const jwt = await getJWT();
+          const response = await fetch('/.netlify/functions/get-language', {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${jwt}`,
+            },
+            body: JSON.stringify({ email: user.email }),
+          });
+          const language = await response.text();
+          setLanguage(language);
+        } catch(err) {
+          console.error('Error fetching language');
+        }
+      })();
     } else {
-      getGeo()
-      .then((languageCode) => {
-        updateLanguage(languageCode);
-      });
+      const storedLanguage = localStorage.getItem('language');
+  
+      if(storedLanguage) {
+        setLanguage(storedLanguage);
+      } else {
+        getGeo()
+        .then((languageCode) => {
+          updateLanguage(languageCode);
+        });
+      }
     }
-  }, []);
+  }, [user]);
 
+  const updateLanguage = async (newLanguage: string) => {
+    if(user) {
+      try {
+        const jwt = await getJWT();
+  
+        await fetch('/.netlify/functions/update-language', {
+          method: 'POST',
+          body: JSON.stringify({
+            email: user.email,
+            language: newLanguage,
+          }),
+          headers: {
+            Authorization: `Bearer ${jwt}`,
+          },
+        });
+      } catch {
+        console.error('Error updating language');
+      }
+    }
 
-
-  const updateLanguage = (newLanguage: string) => {
-    // TODO: store this in a blob
     localStorage.setItem('language', newLanguage);
     setLanguage(newLanguage);
   };

@@ -8,6 +8,7 @@ interface AuthContextProps {
   confirm: (token: string) => Promise<any>;
   login: (email: string, password: string) => Promise<any>;
   logout: () => Promise<void>;
+  getJWT: () => Promise<string | undefined>;
 }
 
 const AuthContext = createContext<AuthContextProps>({
@@ -17,6 +18,7 @@ const AuthContext = createContext<AuthContextProps>({
   confirm: async () => {},
   login: async () => {},
   logout: async () => {},
+  getJWT: async () => '',
 });
 
 export function useAuth() {
@@ -117,6 +119,27 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const getJWT = async () => {
+    const auth = new GoTrue({
+      APIUrl: process.env.NEXT_PUBLIC_NETLIFY_IDENTITY_URL,
+      audience: '',
+      setCookie: false,
+    });
+
+    const user = auth.currentUser();
+
+    if (user) {
+      try {
+        setAuthLoading(true);
+        const jwt = await user.jwt();
+        setAuthLoading(false);
+        return jwt;
+      } catch (error) {
+        setAuthLoading(false);
+        throw error;
+      }
+    }
+  }
 
   const value: AuthContextProps = {
     user,
@@ -125,6 +148,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     confirm,
     login,
     logout,
+    getJWT,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
