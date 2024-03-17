@@ -6,7 +6,7 @@ export default function Nav() {
   const { user, logout } = useAuth();
 
   return (
-    <nav className="flex justify-between py-8">
+    <nav className="flex justify-between py-8 items-center">
       <Link href="/">moneytronics</Link>
 
       <div className="flex gap-4">
