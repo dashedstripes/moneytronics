@@ -1,37 +1,8 @@
 import { getStore } from "@netlify/blobs"
-
-interface Product {
-  id: number,
-  name: string,
-  price: number,
-  imgSrc?: string,
-  memberDiscount: boolean,
-}
+import { Product, testProducts } from "./product";
 
 function getTestProducts(): Product[] {
-  return [
-    {
-      id: 1,
-      name: "Hoodie",
-      price: 100,
-      imgSrc: "/images/hoodie.jpg",
-      memberDiscount: false,
-    },
-    {
-      id: 2,
-      name: "Water Bottle",
-      price: 200,
-      imgSrc: "/images/water-bottle.jpg",
-      memberDiscount: true,
-    },
-    {
-      id: 3,
-      name: "USB Drive",
-      price: 300,
-      imgSrc: "/images/usb-drive.jpg",
-      memberDiscount: false,
-    },
-  ];
+  return testProducts;
 }
 
 async function getProductsFromBlob(): Promise<Product[]> {
