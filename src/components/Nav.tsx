@@ -1,8 +1,11 @@
 import { useAuth } from "@/utils/AuthContext";
 import Link from "next/link";
 import LanguageSelector from "./LanguageSelector";
+import CartNav from "./CartNav";
+import { useCart } from "@/utils/CartContext";
 
 export default function Nav() {
+  const { totalCartItems } = useCart();
   const { user, logout } = useAuth();
 
   return (
@@ -10,6 +13,7 @@ export default function Nav() {
       <Link href="/">moneytronics</Link>
 
       <div className="flex gap-4">
+        <CartNav itemCount={totalCartItems} />
         {user ? (
           <>
             <Link href="/profile">profile</Link>
