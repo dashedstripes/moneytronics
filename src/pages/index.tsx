@@ -4,9 +4,11 @@ import { useEffect, useState } from "react";
 import { getProducts } from "../../backend/get-products";
 import Currency from "@/components/Currency";
 import Link from "next/link";
+import { useCart } from "@/utils/CartContext";
 
 export default function Home({ products }: { products: any[] }) {
   const { confirm, user } = useAuth();
+  const { addToCart } = useCart();
   const [loginConfirmation, setLoginConfirmation] = useState<boolean>(false);
   const [confirmationPending, setConfirmationPending] = useState<boolean>(false);
 
@@ -33,32 +35,50 @@ export default function Home({ products }: { products: any[] }) {
     <main className="container mx-auto px-8">
       {confirmationPending && <p className="text-blue-500 mt-4">Validating sign up...</p>}
       {loginConfirmation && <p className="text-green-500 mt-4">You have successfully logged in!</p>}
-      
+
       <Nav />
 
       <div className="grid md:grid-cols-3 gap-8">
         {products?.map((product) => (
-          <Link href={`/products/${product.slug}`} key={product.id} className="shadow-xl rounded-xl">
-            <img src={`/.netlify/images?url=${product?.imgSrc}&q=30`} alt={product.name} className="rounded-t-xl"/>
-            <div className="flex justify-between p-8">
-              <h2 className="font-bold text-xl">{product.name}</h2>
-
-              <p>
-                {product.memberDiscount && user ? (
-                  <>
-                    <span className="text-red-500 line-through"><Currency/>{product.price}</span>{" "}
-                    <Currency/>
-                    {product.price * 0.9}
-                  </>
-                ) : (
-                  <>
-                  <Currency/>
-                  {product.price}
-                  </>
-                )}
-              </p>
+          <div className="shadow-xl rounded-xl" key={product.id}>
+            <div>
+              <Link href={`/products/${product.slug}`}>
+                <img src={`/.netlify/images?url=${product?.imgSrc}&q=30`} alt={product.name} className="rounded-t-xl" />
+              </Link>
+              <div className="flex justify-between p-8">
+                <div>
+                  <Link href={`/products/${product.slug}`}>
+                    <h2 className="font-bold text-xl">{product.name}</h2>
+                  </Link>
+                  <p>
+                    {product.memberDiscount && user ? (
+                      <>
+                        <span className="text-red-500 line-through"><Currency />{product.price}</span>{" "}
+                        <Currency />
+                        {product.price * 0.9}
+                      </>
+                    ) : (
+                      <>
+                        <Currency />
+                        {product.price}
+                      </>
+                    )}
+                  </p>
+                </div>
+                <button
+                  className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+                  onClick={() => {
+                    addToCart({
+                      id: product.id,
+                      name: product.name,
+                      price: product.price,
+                      quantity: 1
+                    });
+                  }}
+                >Add to Cart</button>
+              </div>
             </div>
-          </Link>
+          </div>
         ))}
       </div>
     </main>
@@ -66,7 +86,7 @@ export default function Home({ products }: { products: any[] }) {
 }
 
 export async function getServerSideProps(context: any) {
-  const products = await getProducts({ 
+  const products = await getProducts({
     source: "test",
     locale: context.locale,
   });

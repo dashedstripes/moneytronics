@@ -9,7 +9,7 @@ const CartNav: React.FC<CartNavProps> = ({ itemCount }) => {
   return (
     <Link href="/cart">
       <div>
-        Cart ({itemCount})
+        cart ({itemCount})
       </div>
     </Link>
   );
