@@ -10,9 +10,15 @@ export default function Nav() {
 
   return (
     <nav className="flex justify-between py-12 items-center">
-      <Link href="/">
-        <img src="/images/logo.svg" alt="logo" className="w-40" />
-      </Link>
+      <div className="flex gap-8">
+        <Link href="/">
+          <img src="/images/logo.svg" alt="logo" className="w-40" />
+        </Link>
+
+        <Link href="/articles">
+          articles
+        </Link>
+      </div>
 
       <div className="flex gap-4">
         <CartNav itemCount={totalCartItems} />

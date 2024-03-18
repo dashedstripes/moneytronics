@@ -5,8 +5,9 @@ import { getProducts } from "../../backend/get-products";
 import Currency from "@/components/Currency";
 import Link from "next/link";
 import { useCart } from "@/utils/CartContext";
+import { Product } from "../../backend/product";
 
-export default function Home({ products }: { products: any[] }) {
+export default function Home({ products }: { products: Product[] }) {
   const { confirm, user } = useAuth();
   const { addToCart } = useCart();
   const [loginConfirmation, setLoginConfirmation] = useState<boolean>(false);
@@ -38,7 +39,7 @@ export default function Home({ products }: { products: any[] }) {
 
       <Nav />
 
-      <div className="grid md:grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-3 gap-8 mb-16">
         {products?.map((product) => (
           <div className="shadow-xl rounded-xl" key={product.id}>
             <div>
