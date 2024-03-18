@@ -37,9 +37,10 @@ export default function Home({ products }: { products: any[] }) {
 
       <div className="grid md:grid-cols-3 gap-8">
         {products?.map((product) => (
-          <div key={product.id} className="border p-8">
-            <h2 className="font-bold text-xl">{product.name}</h2>
-            <div className="flex justify-end">
+          <div key={product.id} className="shadow-xl rounded-xl">
+            <img src={`/.netlify/images?url=${product?.imgSrc}&q=50`} alt={product.name} className="rounded-t-xl"/>
+            <div className="flex justify-between p-8">
+              <h2 className="font-bold text-xl">{product.name}</h2>
               <p><Currency/>{product.price}</p>
             </div>
           </div>

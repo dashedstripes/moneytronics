@@ -4,24 +4,28 @@ interface Product {
   id: number,
   name: string,
   price: number,
+  imgSrc?: string,
 }
 
 function getTestProducts(): Product[] {
   return [
     {
       id: 1,
-      name: "Test Product 1",
+      name: "Hoodie",
       price: 100,
+      imgSrc: "/images/hoodie.jpg"
     },
     {
       id: 2,
-      name: "Test Product 2",
+      name: "Water Bottle",
       price: 200,
+      imgSrc: "/images/water-bottle.jpg"
     },
     {
       id: 3,
-      name: "Test Product 3",
+      name: "USB Drive",
       price: 300,
+      imgSrc: "/images/usb-drive.jpg"
     },
   ];
 }
