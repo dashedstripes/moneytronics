@@ -4,7 +4,7 @@ import { Product } from '../../../backend/product';
 import Currency from '@/components/Currency';
 import { useAuth } from '@/utils/AuthContext';
 
-export default function Product({ product }: { product: Product }) {
+export default function ProductPage({ product }: { product: Product }) {
   const { user } = useAuth();
   return (
     <main className="container mx-auto px-8">
