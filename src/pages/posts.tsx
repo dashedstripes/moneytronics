@@ -2,6 +2,7 @@ import React from 'react';
 import { Post } from '../../backend/post';
 import { getPosts } from '../../backend/get-posts';
 import Nav from '@/components/Nav';
+import Link from 'next/link';
 
 export default function Posts({ posts }: { posts: Post[] }) {
 
@@ -12,9 +13,9 @@ export default function Posts({ posts }: { posts: Post[] }) {
       <h1 className='font-bold text-4xl'>blog</h1>
       <div>
       {posts.map((post) => (
-        <div key={post.id}>
+        <Link key={post.id} href={`/posts/${post.slug}`}>
           <h2 className='font-bold text-2xl mb-10'>{post.title}</h2>
-        </div>
+        </Link>
       ))}
       </div>
       </div>
