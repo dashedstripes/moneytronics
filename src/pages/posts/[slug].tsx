@@ -10,7 +10,9 @@ export default function PostPage({ post }: { post: Post }) {
         <Nav />
       </div>
       
-      <img src={`/.netlify/images?url=/images/${post.slug}.jpg&fit=cover&w=2000&h=400`} alt={post.title} className='w-full'/>
+      <h1 className="py-32 text-center bg-cover font-bold text-3xl text-white" style={{ backgroundImage: `url(/.netlify/images?url=/images/${post.slug}.jpg&fit=cover&w=2000&h=400)` }}>
+        {post.title}
+      </h1>
 
       <div className='mx-auto max-w-[65ch] py-8'>
         <article className="prose">
