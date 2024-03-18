@@ -5,9 +5,13 @@ import Markdown from 'react-markdown';
 
 export default function PostPage({ post }: { post: Post }) {
   return (
-    <main className="container mx-auto px-8">
-      <Nav />
+    <main>
+      <div className="container mx-auto px-8">
+        <Nav />
+      </div>
       
+      <img src={`/.netlify/images?url=/images/${post.slug}.jpg&fit=cover&w=2000&h=400`} alt={post.title} className='w-full'/>
+
       <div className='mx-auto max-w-[65ch] py-8'>
         <article className="prose">
           <Markdown>{post.content}</Markdown>

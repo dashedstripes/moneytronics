@@ -19,7 +19,7 @@ export default function Nav() {
           shop
         </Link>
 
-        <Link href="/posts">
+        <Link href="/blog">
           blog
         </Link>
       </div>
