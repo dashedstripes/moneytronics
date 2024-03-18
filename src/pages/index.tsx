@@ -5,7 +5,7 @@ import { getProducts } from "../../backend/get-products";
 import Currency from "@/components/Currency";
 
 export default function Home({ products }: { products: any[] }) {
-  const { confirm } = useAuth();
+  const { confirm, user } = useAuth();
   const [loginConfirmation, setLoginConfirmation] = useState<boolean>(false);
   const [confirmationPending, setConfirmationPending] = useState<boolean>(false);
 
@@ -41,7 +41,21 @@ export default function Home({ products }: { products: any[] }) {
             <img src={`/.netlify/images?url=${product?.imgSrc}&q=50`} alt={product.name} className="rounded-t-xl"/>
             <div className="flex justify-between p-8">
               <h2 className="font-bold text-xl">{product.name}</h2>
-              <p><Currency/>{product.price}</p>
+
+              <p>
+                {product.memberDiscount && user ? (
+                  <>
+                    <span className="text-red-500 line-through"><Currency/>{product.price}</span>{" "}
+                    <Currency/>
+                    {product.price * 0.9}
+                  </>
+                ) : (
+                  <>
+                  <Currency/>
+                  {product.price}
+                  </>
+                )}
+              </p>
             </div>
           </div>
         ))}

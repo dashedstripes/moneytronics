@@ -5,6 +5,7 @@ interface Product {
   name: string,
   price: number,
   imgSrc?: string,
+  memberDiscount: boolean,
 }
 
 function getTestProducts(): Product[] {
@@ -13,19 +14,22 @@ function getTestProducts(): Product[] {
       id: 1,
       name: "Hoodie",
       price: 100,
-      imgSrc: "/images/hoodie.jpg"
+      imgSrc: "/images/hoodie.jpg",
+      memberDiscount: false,
     },
     {
       id: 2,
       name: "Water Bottle",
       price: 200,
-      imgSrc: "/images/water-bottle.jpg"
+      imgSrc: "/images/water-bottle.jpg",
+      memberDiscount: true,
     },
     {
       id: 3,
       name: "USB Drive",
       price: 300,
-      imgSrc: "/images/usb-drive.jpg"
+      imgSrc: "/images/usb-drive.jpg",
+      memberDiscount: false,
     },
   ];
 }
