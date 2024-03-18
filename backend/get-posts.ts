@@ -12,12 +12,13 @@ export const getTestPosts = async (): Promise<Post[]> => {
     const postContent = fs.readFileSync(postPath, 'utf8');
 
     const title = postContent.split('\n')[0].replace('#', '').trim();
+    const content = postContent.split('\n').slice(1).join('\n');
 
     return {
       id: index,
       title,
       slug: postFile.replace('.md', ''),
-      content: postContent,
+      content: content,
     };
   });
 
