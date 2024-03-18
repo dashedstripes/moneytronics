@@ -15,8 +15,12 @@ export default function Nav() {
           <img src="/images/logo.svg" alt="logo" className="w-40" />
         </Link>
 
-        <Link href="/articles">
-          articles
+        <Link href="/">
+          shop
+        </Link>
+
+        <Link href="/posts">
+          blog
         </Link>
       </div>
 
