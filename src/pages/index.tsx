@@ -39,7 +39,7 @@ export default function Home({ products }: { products: any[] }) {
       <div className="grid md:grid-cols-3 gap-8">
         {products?.map((product) => (
           <Link href={`/products/${product.slug}`} key={product.id} className="shadow-xl rounded-xl">
-            <img src={`/.netlify/images?url=${product?.imgSrc}&q=50`} alt={product.name} className="rounded-t-xl"/>
+            <img src={`/.netlify/images?url=${product?.imgSrc}&q=30`} alt={product.name} className="rounded-t-xl"/>
             <div className="flex justify-between p-8">
               <h2 className="font-bold text-xl">{product.name}</h2>
 
