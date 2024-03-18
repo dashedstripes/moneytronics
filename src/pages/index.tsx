@@ -8,7 +8,7 @@ import { useCart } from "@/utils/CartContext";
 import { Product } from "../../backend/product";
 import Info from "@/components/Info";
 
-export default function Home({ products }: { products: Product[] }) {
+export default function Home({ products, splitBucket }: { products: Product[], splitBucket: string }) {
   const { confirm, user } = useAuth();
   const { addToCart } = useCart();
   const [loginConfirmation, setLoginConfirmation] = useState<boolean>(false);
@@ -38,6 +38,8 @@ export default function Home({ products }: { products: Product[] }) {
 
       <Info content={
         <div>
+          <p className="mb-4">You are in Test Bucket {splitBucket}</p>
+          <hr/><br/>
           <p>This page uses server side rendering.</p>
           <p className="mb-2">The page is cached for 1 week via the Cache-Control Header</p>
           <code className="bg-gray-200">context.res.setHeader(&quot;Cache-Control&quot;, &quot;public, max-age=604800, stale-while-revalidate=604800&quot;);</code>
@@ -102,11 +104,14 @@ export async function getServerSideProps(context: any) {
     locale: context.locale,
   });
 
+  const splitBucket = context.req.cookies?.test_bucket || "a";
+
   context.res.setHeader("Cache-Control", "public, max-age=604800, stale-while-revalidate=604800");
 
   return {
     props: {
       products: products || [],
+      splitBucket: splitBucket,
     },
   };
 }
