@@ -40,7 +40,7 @@ export default function Home({ products }: { products: Product[] }) {
         <div>
           <p>This page uses server side rendering.</p>
           <p className="mb-2">The page is cached for 1 week via the Cache-Control Header</p>
-          <code className="bg-gray-200">context.res.setHeader("Cache-Control", "public, max-age=604800, stale-while-revalidate=604800");</code>
+          <code className="bg-gray-200">context.res.setHeader(&quot;Cache-Control&quot;, &quot;public, max-age=604800, stale-while-revalidate=604800&quot;);</code>
         </div>
       }/>
 
