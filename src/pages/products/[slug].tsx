@@ -9,7 +9,7 @@ export default function ProductPage({ product }: { product: Product }) {
   return (
     <main className="container mx-auto px-8">
       <Nav />
-      <div className='grid grid-cols-2 gap-20'>
+      <div className='grid md:grid-cols-2 gap-20'>
         {product.imgSrc && <img src={`/.netlify/images?url=${product?.imgSrc}&q=50`}  alt={product.name} />}
         <div>
           <h1 className='font-bold text-4xl mb-8'>{product.name}</h1>
