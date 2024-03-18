@@ -6,6 +6,7 @@ import Currency from "@/components/Currency";
 import Link from "next/link";
 import { useCart } from "@/utils/CartContext";
 import { Product } from "../../backend/product";
+import Info from "@/components/Info";
 
 export default function Home({ products }: { products: Product[] }) {
   const { confirm, user } = useAuth();
@@ -34,6 +35,15 @@ export default function Home({ products }: { products: Product[] }) {
 
   return (
     <main className="container mx-auto px-8">
+
+      <Info content={
+        <div>
+          <p>This page uses server side rendering.</p>
+          <p className="mb-2">The page is cached for 1 week via the Cache-Control Header</p>
+          <code className="bg-gray-200">context.res.setHeader("Cache-Control", "public, max-age=604800, stale-while-revalidate=604800");</code>
+        </div>
+      }/>
+
       {confirmationPending && <p className="text-blue-500 mt-4">Validating sign up...</p>}
       {loginConfirmation && <p className="text-green-500 mt-4">You have successfully logged in!</p>}
 
