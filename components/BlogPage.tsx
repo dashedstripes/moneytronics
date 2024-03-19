@@ -15,7 +15,7 @@ export default function Posts({ posts }: { posts: Post[] }) {
         <h1 className='font-bold text-4xl mb-8'>blog</h1>
         <div>
           {posts.map((post) => (
-            <Link key={post.id} href={`/posts/${post.slug}`} className='block mb-20 relative'>
+            <Link key={post.id} href={`/blog/${post.slug}`} className='block mb-20 relative'>
               <img src={`/.netlify/images?url=/images/${post.slug}.jpg`} alt={post.title} className='mb-4 rounded-xl shadow-xl'/>
               <h2 className='absolute bottom-0 px-8 py-16 bg-gradient-to-t from-gray-50 via-gray-50 text-2xl w-full'>{post.title}</h2>
             </Link>

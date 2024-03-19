@@ -1,7 +1,8 @@
-import Nav from '../../../components/Nav';
-import { getPostBySlug } from '../../../backend/get-posts-by-slug';
-import { Post } from '../../../backend/post';
+"use client"
+
+import { Post } from '@/backend/post';
 import Markdown from 'react-markdown';
+import Nav from '@/components/Nav';
 
 export default function PostPage({ post }: { post: Post }) {
   return (
@@ -21,21 +22,4 @@ export default function PostPage({ post }: { post: Post }) {
       </div>
     </main>
   );
-}
-
-export async function getServerSideProps(context: any) {
-  const { slug } = context.params;
-  const { locale } = context;
-
-  const post = await getPostBySlug({
-    source: "test",
-    locale,
-    slug,
-  });
-
-  return {
-    props: {
-      post,
-    }
-  }
 }
