@@ -1,11 +1,13 @@
-import Nav from "../../components/Nav";
+"use client"
+
+import Nav from "@/components/Nav";
 import { useAuth } from "@/utils/AuthContext";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useState } from "react";
 
-export default function Login() {
+export default function LoginPage() {
   const router = useRouter();
 
   const { login, authLoading, user } = useAuth();

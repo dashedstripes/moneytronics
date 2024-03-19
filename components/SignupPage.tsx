@@ -1,4 +1,6 @@
-import Nav from "../../components/Nav";
+"use client"
+
+import Nav from "@/components/Nav";
 import { useAuth } from "@/utils/AuthContext";
 import Link from "next/link";
 import { useState } from "react";
