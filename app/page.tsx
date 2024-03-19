@@ -3,6 +3,7 @@ import Home from '@/components/HomePage';
 import { cookies } from 'next/headers'
 
 export default async function Page() {
+
   const products = await getProducts({
     source: "test",
     locale: "en-US",
