@@ -1,4 +1,4 @@
-import Nav from "@/components/Nav";
+import Nav from "../../components/Nav";
 import { useAuth } from "@/utils/AuthContext";
 import Link from "next/link";
 import { useRouter } from "next/router";

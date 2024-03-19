@@ -1,12 +1,13 @@
-import Nav from "@/components/Nav";
-import { useAuth } from "@/utils/AuthContext";
+"use client"
+
 import { useEffect, useState } from "react";
-import { getProducts } from "../../backend/get-products";
-import Currency from "@/components/Currency";
 import Link from "next/link";
+import { Product } from "@/backend/product";
+import { useAuth } from "@/utils/AuthContext";
 import { useCart } from "@/utils/CartContext";
-import { Product } from "../../backend/product";
 import Info from "@/components/Info";
+import Currency from "@/components/Currency";
+import Nav from "@/components/Nav";
 
 export default function Home({ products, splitBucket }: { products: Product[], splitBucket: string }) {
   const { confirm, user } = useAuth();
@@ -96,22 +97,4 @@ export default function Home({ products, splitBucket }: { products: Product[], s
       </div>
     </main>
   );
-}
-
-export async function getServerSideProps(context: any) {
-  const products = await getProducts({
-    source: "test",
-    locale: context.locale,
-  });
-
-  const splitBucket = context.req.cookies?.test_bucket || "a";
-
-  context.res.setHeader("Cache-Control", "public, max-age=604800, stale-while-revalidate=604800");
-
-  return {
-    props: {
-      products: products || [],
-      splitBucket: splitBucket,
-    },
-  };
 }

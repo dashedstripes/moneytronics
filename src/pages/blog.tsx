@@ -1,7 +1,7 @@
 import React from 'react';
 import { Post } from '../../backend/post';
 import { getPosts } from '../../backend/get-posts';
-import Nav from '@/components/Nav';
+import Nav from '../../components/Nav';
 import Link from 'next/link';
 
 export default function Posts({ posts }: { posts: Post[] }) {

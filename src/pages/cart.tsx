@@ -1,5 +1,5 @@
-import Currency from "@/components/Currency";
-import Nav from "@/components/Nav";
+import Currency from "../../components/Currency";
+import Nav from "../../components/Nav";
 import { useCart } from "@/utils/CartContext";
 
 export default function Cart() {

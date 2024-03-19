@@ -1,4 +1,4 @@
-import Nav from '@/components/Nav';
+import Nav from '../../../components/Nav';
 import { getPostBySlug } from '../../../backend/get-posts-by-slug';
 import { Post } from '../../../backend/post';
 import Markdown from 'react-markdown';

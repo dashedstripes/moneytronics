@@ -1,8 +1,10 @@
-import { useAuth } from "@/utils/AuthContext";
+"use client"
+
 import Link from "next/link";
-import LanguageSelector from "./LanguageSelector";
-import CartNav from "./CartNav";
+import { useAuth } from "@/utils/AuthContext";
 import { useCart } from "@/utils/CartContext";
+import CartNav from "@/components/CartNav";
+import LanguageSelector from "@/components/LanguageSelector";
 
 export default function Nav() {
   const { totalCartItems } = useCart();

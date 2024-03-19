@@ -1,8 +1,9 @@
-import Nav from '@/components/Nav';
-import { getProductBySlug } from '../../../backend/get-products-by-slug';
-import { Product } from '../../../backend/product';
+"use client"
+
+import Nav from './Nav';
 import Currency from '@/components/Currency';
 import { useAuth } from '@/utils/AuthContext';
+import { Product } from '@/backend/product';
 
 export default function ProductPage({ product }: { product: Product }) {
   const { user } = useAuth();
@@ -31,21 +32,4 @@ export default function ProductPage({ product }: { product: Product }) {
       </div>
     </main>
   );
-}
-
-export async function getServerSideProps(context: any) {
-  const { slug } = context.params;
-  const { locale } = context;
-
-  const product = await getProductBySlug({
-    source: "test",
-    locale,
-    slug,
-  });
-
-  return {
-    props: {
-      product,
-    }
-  }
 }
