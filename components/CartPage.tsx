@@ -1,8 +1,10 @@
-import Currency from "../../components/Currency";
-import Nav from "../../components/Nav";
-import { useCart } from "@/utils/CartContext";
+"use client"
 
-export default function Cart() {
+import { useCart } from "@/utils/CartContext";
+import Currency from "@/components/Currency";
+import Nav from "@/components/Nav";
+
+export default function CartPage() {
   const { cartItems, totalCartItems, totalCartPrice, removeFromCart } = useCart();
 
   return (
