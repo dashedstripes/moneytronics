@@ -6,7 +6,6 @@ export function middleware(request: NextRequest) {
   const response = NextResponse.next()
 
   // Split testing
-
   const bucket = request.cookies.get("test_bucket");
 
   if(!bucket) {
