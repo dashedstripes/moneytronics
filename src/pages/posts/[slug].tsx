@@ -14,7 +14,7 @@ export default function PostPage({ post }: { post: Post }) {
         {post.title}
       </h1>
 
-      <div className='mx-auto max-w-[65ch] py-8'>
+      <div className='mx-auto max-w-[65ch] p-8'>
         <article className="prose">
           <Markdown>{post.content}</Markdown>
         </article>

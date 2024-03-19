@@ -9,8 +9,8 @@ export default function Nav() {
   const { user, logout } = useAuth();
 
   return (
-    <nav className="flex justify-between py-12 items-center">
-      <div className="flex gap-8">
+    <nav className="flex justify-between py-12 items-center flex-wrap">
+      <div className="flex gap-8 mb-8 md:mb-0">
         <Link href="/">
           <img src="/images/logo.svg" alt="logo" className="w-40" />
         </Link>
@@ -24,7 +24,7 @@ export default function Nav() {
         </Link>
       </div>
 
-      <div className="flex gap-4">
+      <div className="flex gap-4 items-end">
         <CartNav itemCount={totalCartItems} />
         {user ? (
           <>

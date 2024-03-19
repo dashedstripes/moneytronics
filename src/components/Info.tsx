@@ -39,7 +39,7 @@ export default function Info({ content }: { content: React.ReactNode }) {
 
   return (
     <div>
-      <button onClick={() => setIsOpen(!isOpen)} className="absolute bottom-8 right-8 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full">?</button>
+      <button onClick={() => setIsOpen(!isOpen)} className="fixed bottom-8 right-8 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full">?</button>
 
       {isOpen && createPortal(
         modal,
