@@ -1,3 +1,5 @@
+"use client"
+
 import GoTrue from 'gotrue-js';
 import React, { createContext, useContext, useState, useEffect } from 'react';
 

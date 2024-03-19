@@ -1,3 +1,5 @@
+"use client"
+
 const currencySymbols: { [key: string]: string } = {
   "en-US": "$",
   "en-GB": "£",
