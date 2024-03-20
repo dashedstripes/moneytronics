@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Product } from "@/backend/product";
-import { useAuth } from "@/utils/AuthContext";
-import { useCart } from "@/utils/CartContext";
-import Info from "@/components/Info";
-import Currency from "@/components/Currency";
-import Nav from "@/components/Nav";
+import { useAuth } from "../utils/AuthContext";
+import { useCart } from "../utils/CartContext";
+import Info from "./Info";
+import Currency from "./Currency";
+import Nav from "./Nav";
 
 export default function Home({ products, splitBucket }: { products: Product[], splitBucket: string }) {
   const { confirm, user } = useAuth();
@@ -37,15 +37,15 @@ export default function Home({ products, splitBucket }: { products: Product[], s
   return (
     <main className="container mx-auto px-8">
 
-      <Info content={
+      <Info>
         <div>
           <p className="mb-4">You are in Test Bucket {splitBucket}</p>
-          <hr/><br/>
+          <hr /><br />
           <p>This page uses server side rendering.</p>
           <p className="mb-2">The page is cached for 1 week via the Cache-Control Header</p>
           <code className="bg-gray-200">context.res.setHeader(&quot;Cache-Control&quot;, &quot;public, max-age=604800, stale-while-revalidate=604800&quot;);</code>
         </div>
-      }/>
+      </Info>
 
       {confirmationPending && <p className="text-blue-500 mt-4">Validating sign up...</p>}
       {loginConfirmation && <p className="text-green-500 mt-4">You have successfully logged in!</p>}

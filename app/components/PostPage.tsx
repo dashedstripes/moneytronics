@@ -2,7 +2,7 @@
 
 import { Post } from '@/backend/post';
 import Markdown from 'react-markdown';
-import Nav from '@/components/Nav';
+import Nav from './Nav';
 
 export default function PostPage({ post }: { post: Post }) {
   return (

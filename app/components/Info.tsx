@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { createPortal } from "react-dom";
 
-export default function Info({ content }: { content: React.ReactNode }) {
+export default function Info({ children }: { children: React.ReactElement }) {
   const [domLoaded, setDomLoaded] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -23,7 +23,7 @@ export default function Info({ content }: { content: React.ReactNode }) {
               <div className="sm:flex sm:items-start">
                 <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                   <div className="mt-2 text-gray-800">
-                    {content}
+                    {children}
                   </div>
                 </div>
               </div>
@@ -35,7 +35,7 @@ export default function Info({ content }: { content: React.ReactNode }) {
         </div>
       </div>
     </div>
-  )
+  );
 
   if (!domLoaded) return null;
 
@@ -44,7 +44,7 @@ export default function Info({ content }: { content: React.ReactNode }) {
       <button onClick={() => setIsOpen(!isOpen)} className="fixed bottom-8 right-8 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full">?</button>
 
       {isOpen && createPortal(
-        modal,
+       modal,
         document.body
       )}
     </div>

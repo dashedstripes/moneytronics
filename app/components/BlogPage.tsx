@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Post } from '@/backend/post';
-import Nav from '@/components/Nav';
+import Nav from './Nav';
 
 export default function Posts({ posts }: { posts: Post[] }) {
   return (

@@ -1,8 +1,8 @@
 "use client"
 
 import Nav from './Nav';
-import Currency from '@/components/Currency';
-import { useAuth } from '@/utils/AuthContext';
+import Currency from './Currency';
+import { useAuth } from '../utils/AuthContext';
 import { Product } from '@/backend/product';
 
 export default function ProductPage({ product }: { product: Product }) {

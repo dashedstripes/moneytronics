@@ -1,7 +1,7 @@
 "use client"
 
-import Nav from '@/components/Nav';
-import { useAuth } from '@/utils/AuthContext';
+import Nav from './Nav';
+import { useAuth } from '../utils/AuthContext';
 import React from 'react';
 
 export default function Profile() {
