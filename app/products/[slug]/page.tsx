@@ -1,4 +1,5 @@
 import { getProductBySlug } from "@/backend/get-products-by-slug";
+import AddToCartButton from "@/components/AddToCartButton";
 import Nav from "@/components/Nav";
 import ProductPrice from "@/components/ProductPrice";
 import { cookies } from "next/headers";
@@ -27,9 +28,10 @@ export default async function Page(context: any) {
           {product?.imgSrc && <img src={`/.netlify/images?url=${product?.imgSrc}&q=50`} alt={product.name} className='rounded-xl shadow-xl' />}
           <div>
             <h1 className='font-bold text-4xl mb-8'>{product.name}</h1>
-            <h2 className='text-3xl'>
+            <h2 className='text-3xl mb-8'>
               <ProductPrice price={product.price} hasMemberDiscount={product.memberDiscount} />
             </h2>
+            <AddToCartButton product={product} />
           </div>
         </div>
       </main>
