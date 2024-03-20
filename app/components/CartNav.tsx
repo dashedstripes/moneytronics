@@ -1,20 +1,17 @@
 "use client"
 
+import { useCart } from '@/utils/CartContext';
 import Link from 'next/link';
 import React from 'react';
 
-interface CartNavProps {
-  itemCount: number;
-}
-
-const CartNav: React.FC<CartNavProps> = ({ itemCount }) => {
+export default function CartNav() {
+  const { totalCartItems } = useCart();
+  
   return (
     <Link href="/cart">
       <div>
-        cart ({itemCount})
+        cart ({totalCartItems})
       </div>
     </Link>
   );
 };
-
-export default CartNav;

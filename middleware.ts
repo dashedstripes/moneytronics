@@ -15,5 +15,13 @@ export function middleware(request: NextRequest) {
     response.cookies.set('test_bucket', newBucketValue)
   }
 
+  // get locale from Accept-Language header
+  const acceptLanguage = request.headers.get('Accept-Language')
+  const locale = acceptLanguage ? acceptLanguage.split(',')[0] : 'en'
+  
+  if(!request.cookies.get('locale')) {
+    response.cookies.set('locale', locale)
+  }
+
   return response
 }

@@ -2,19 +2,20 @@
 
 import React from 'react';
 
-export default function LanguageSelector(){
+const languages = ["en-US", "en-GB", "es-ES"];
 
-  return <div>broken rn</div>
+export default function LanguageSelector({ locale }: { locale: string }) {
+
   // const router = useRouter();
-  // const getFlagEmoji = (language: string) => {
-  //   const flagEmojis: {[key: string]: string} = {
-  //     "en-US": "🇺🇸",
-  //     "en-GB": "🇬🇧",
-  //     "es-ES": "🇪🇸",
-  //   };
+  const getFlagEmoji = (language: string) => {
+    const flagEmojis: {[key: string]: string} = {
+      "en-US": "🇺🇸",
+      "en-GB": "🇬🇧",
+      "es-ES": "🇪🇸",
+    };
 
-  //   return flagEmojis[language] || '';
-  // };
+    return flagEmojis[language] || '';
+  };
 
   // async function setLanguage(language: string) {
   //   await fetch("/set-locale", {
@@ -24,19 +25,19 @@ export default function LanguageSelector(){
   //   router.push(router.asPath, undefined, { locale: language });
   // }
 
-  // return (
-  //   <div>
-  //     <select
-  //       id="language-select"
-  //       value={router.locale}
-  //       onChange={(e) => setLanguage(e.target.value)}
-  //     >
-  //       {languages?.map((language) => (
-  //         <option key={language} value={language}>
-  //           {getFlagEmoji(language)}
-  //         </option>
-  //       ))}
-  //     </select>
-  //   </div>
-  // );
+  return (
+    <div>
+      <select
+        id="language-select"
+        value={locale}
+        onChange={(e) => console.log(e.target.value)}
+      >
+        {languages?.map((language) => (
+          <option key={language} value={language}>
+            {getFlagEmoji(language)}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
 };

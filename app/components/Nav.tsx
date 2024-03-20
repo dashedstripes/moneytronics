@@ -1,17 +1,11 @@
-"use client"
-
 import Link from "next/link";
-import { useAuth } from "../utils/AuthContext";
-import { useCart } from "../utils/CartContext";
 import CartNav from "./CartNav";
 import LanguageSelector from "./LanguageSelector";
+import UserNav from "./UserNav";
 
-export default function Nav() {
-  const { totalCartItems } = useCart();
-  const { user, logout } = useAuth();
-
+export default function Nav({ locale }: { locale: string }) {
   return (
-    <nav className="flex justify-between py-12 items-center flex-wrap">
+    <nav className="flex justify-between py-12 items-center flex-wrap px-8">
       <div className="flex gap-8 mb-8 md:mb-0">
         <Link href="/">
           <img src="/images/logo.svg" alt="logo" className="w-40" />
@@ -27,18 +21,11 @@ export default function Nav() {
       </div>
 
       <div className="flex gap-4 items-end">
-        <CartNav itemCount={totalCartItems} />
-        {user ? (
-          <>
-            <Link href="/profile">profile</Link>
-            <button onClick={() => logout()}>logout</button>
-          </>
-        ) : (
-          <Link href="/login">login</Link>
-        )}
+        <CartNav />
+        <UserNav/>
 
         <div className="ml-4">
-          <LanguageSelector/>
+          <LanguageSelector locale={locale}/>
         </div>
       </div>
     </nav>
