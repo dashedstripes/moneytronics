@@ -36,8 +36,6 @@ export default function LoginPage() {
 
   return (
     <main className="container mx-auto px-8">
-      <Nav />
-
       <form className="max-w-sm mx-auto" onSubmit={handleSubmit}>
         <h2 className="text-2xl font-bold mb-4">Login to Moneytronics</h2>
         <div className="mb-4">
