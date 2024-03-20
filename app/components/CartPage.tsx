@@ -2,14 +2,12 @@
 
 import { useCart } from "../utils/CartContext";
 import Currency from "./Currency";
-import Nav from "./Nav";
 
 export default function CartPage() {
   const { cartItems, totalCartItems, totalCartPrice, removeFromCart } = useCart();
 
   return (
     <main className="container mx-auto px-8">
-      <Nav />
       <div className="mx-auto max-w-[75ch] pt-8">
         <div className="flex justify-between items-center border-b">
           <h2 className="font-bold text-3xl mb-8">Your Cart</h2>
